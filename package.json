@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start-local": "nodemon ./bin/www",
+    "start-local": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -18,5 +18,11 @@
     "sequelize": "^7.0.0-alpha.4",
     "winston": "^3.4.0",
     "winston-daily-rotate-file": "^4.5.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "2.5.1"
   }
 }

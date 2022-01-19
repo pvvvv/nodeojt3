@@ -6,17 +6,22 @@ const logDir = './logs';
 //     return `${info.timestamp} ${info.level}: ${info.message}`;
 // };
 
-
-const colors = {error: 'red', warn: 'yellow', info: 'green', http: 'magenta', debug: 'blue'}
+const colors = {
+    error: 'red',
+    warn: 'yellow',
+    info: 'green',
+    http: 'magenta',
+    debug: 'blue',
+};
 winston.addColors(colors);
 
 const format = winston.format.combine(
-    winston.format.timestamp({format:'YYYY-MM-DD HH:MM:SS'}),
+    winston.format.timestamp({ format: 'YYYY-MM-DD HH:MM:SS' }),
     winston.format.colorize({ all: true }),
     winston.format.printf(
-        (info) => `${info.timestamp} ${info.level} ${info.message}`
-    )
-)
+        info => `${info.timestamp} ${info.level} ${info.message}`,
+    ),
+);
 
 /*
  * Log Level
@@ -25,33 +30,33 @@ const format = winston.format.combine(
 const logger = winston.createLogger({
     format,
     transports: [
-      // info 레벨 로그를 저장할 파일 설정
+        // info 레벨 로그를 저장할 파일 설정
         new winstonDaily({
             level: 'info',
             datePattern: 'YYYY-MM-DD',
             dirname: `${logDir}/log`,
             filename: `%DATE%.log`,
-            maxFiles: 30,  // 30일치 로그 파일 저장
-            zippedArchive: true, 
+            maxFiles: 30, // 30일치 로그 파일 저장
+            zippedArchive: true,
         }),
-      // error 레벨 로그를 저장할 파일 설정
+        // error 레벨 로그를 저장할 파일 설정
         new winstonDaily({
             level: 'error',
             datePattern: 'YYYY-MM-DD',
-            dirname: `${logDir}/error`,  // error.log 파일은 /logs/error 하위에 저장 
+            dirname: `${logDir}/error`, // error.log 파일은 /logs/error 하위에 저장
             filename: `%DATE%.error.log`,
             maxFiles: 30,
             zippedArchive: true,
         }),
         new winston.transports.Console({
-            handleExceptions: true
-        })
-    ]
+            handleExceptions: true,
+        }),
+    ],
 });
 
 module.exports = logger;
 module.exports.stream = {
-    write: function(message, encoding){
+    write: function (message, encoding) {
         logger.info(message);
-    }
-}
+    },
+};

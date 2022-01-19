@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "batchMaster",
+    "password": "123123123",
+    "database": "batch",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

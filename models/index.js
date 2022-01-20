@@ -6,6 +6,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/sequelize.json')[env];
 const db = {};
 const moment = require('moment');
+const logger = require('../config/logger');
 
 let sequelize;
 config.timezone = '+09:00';
@@ -44,7 +45,6 @@ fs.readdirSync(__dirname)
             sequelize,
             Sequelize.DataTypes,
         );
-
         db[model.name] = model;
     });
 
